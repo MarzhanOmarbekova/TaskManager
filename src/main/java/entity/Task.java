@@ -24,8 +24,8 @@ public class Task {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "users_id")
+    private Users user;
 
     @PrePersist
     protected void onCreate() {

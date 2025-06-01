@@ -1,6 +1,6 @@
 package controller;
 
-import entity.User;
+import entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,12 +16,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/api/auth/register")
-    public User register(@RequestBody User user){
+    public Users register(@RequestBody Users user){
         return userService.register(user);
     }
 
     @PostMapping("/api/auth/login")
-    public String login(@RequestBody User user) {
+    public String login(@RequestBody Users user) {
 
         return userService.verify(user);
     }

@@ -1,7 +1,7 @@
 package controller;
 
 import entity.Task;
-import entity.User;
+import entity.Users;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -20,14 +20,10 @@ public class TaskController {
     private TaskRepository taskRepository;
 
     @GetMapping("/tasks")
-    public List<Task> getTasks(User user) {
+    public List<Task> getTasks(Users user) {
         return taskRepository.findAllByUser(user);
     }
 
-    @GetMapping("/csrf-token")
-    public CsrfToken getCsrfToken(HttpServletRequest request) {
-        return (CsrfToken) request.getAttribute("_csrf");
-    }
 
     @PostMapping("/tasks")
     public Task addTask(@RequestBody Task task) {

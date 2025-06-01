@@ -1,6 +1,6 @@
 package service;
 
-import entity.User;
+import entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,13 +23,14 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User register(User user) {
-        user.setPassword(encoder.encode(user.getPassword()));
-        userRepository.save(user);
-        return user;
+    public Users register(Users user) {
+        System.out.println(user);
+        String ps = encoder.encode(user.getPassword());
+        user.setPassword(ps);
+        return userRepository.save(user);
     }
 
-    public String verify(User user) {
+    public String verify(Users user) {
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         if (authentication.isAuthenticated()) {
             return jwtService.generateToken(user.getUsername());
